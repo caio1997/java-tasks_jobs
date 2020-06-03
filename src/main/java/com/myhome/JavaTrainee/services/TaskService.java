@@ -35,15 +35,14 @@ public class TaskService {
 		return objTask;
 	}
 	
+	
 	public Task update(Long id, Task task) {
 		Task objTask = taskRepository.getOne(id);
 		objTask.setName(task.getName());
 		objTask.setWeight(task.getWeight());
 		objTask.setCompleted(task.isCompleted());
 		objTask.setCreatedAt(task.getCreatedAt());
-		taskRepository.save(objTask);
-		
-		return objTask;
+		return taskRepository.save(objTask);
 	}
 	
 	public String delete(Long id) {
