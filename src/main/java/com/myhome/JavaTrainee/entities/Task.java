@@ -19,16 +19,16 @@ public class Task implements Serializable{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-	
+	@NotNull
 	private String name;
 	
-	
+	@NotNull
 	private Integer weight;
 	
-	
+	@NotNull
 	private boolean completed;
 	
-	
+	@NotNull
 	@DateTimeFormat(pattern = "dd-MM-yyyy")
 	private Date createdAt;
 	

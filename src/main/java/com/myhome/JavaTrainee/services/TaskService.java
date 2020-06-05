@@ -1,5 +1,6 @@
 package com.myhome.JavaTrainee.services;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,15 +16,23 @@ public class TaskService {
 	@Autowired
 	private TaskRepository taskRepository;
 	
-	public List<Task> findAll(){
-		return taskRepository.findAll();
+	//Pesquisar pelo nome da Task
+	public List<Task> findName(String name){
+		return taskRepository.findName(name);
 	}
 	
+	//Pesquisa todos as tasks
+	//public List<Task> findAll(){
+	//	return taskRepository.findAll();
+	//}
+	
+	//Pesquisa a task pelo ID
 	public Optional<Task> findById(Long id) {
 		Optional<Task> task = taskRepository.findById(id);
 		return task;
 	}
 	
+	//Instancia uma task
 	public Task save(Task task) {
 		Task objTask = new Task();
 		objTask.setName(task.getName());
@@ -35,7 +44,7 @@ public class TaskService {
 		return objTask;
 	}
 	
-	
+	//Atualiza uma task
 	public Task update(Long id, Task task) {
 		Task objTask = taskRepository.getOne(id);
 		objTask.setName(task.getName());
@@ -45,6 +54,7 @@ public class TaskService {
 		return taskRepository.save(objTask);
 	}
 	
+	//Deleta uma task
 	public String delete(Long id) {
 		taskRepository.deleteById(id);
 		return "OK";
