@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,59 +18,63 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.myhome.JavaTrainee.entities.Task;
-import com.myhome.JavaTrainee.repositories.TaskRepository;
 import com.myhome.JavaTrainee.services.TaskService;
 
 @Controller
 @RequestMapping("/task")
 public class TaskController {
-	
+
 	@Autowired
 	private TaskService taskService;
-	
-	@Autowired
-	private TaskRepository taskRepository;
-	
-	//Pesquina pelo nome da Task
+
+	// Pesquina pela data da Task
 	@GetMapping
-	public ResponseEntity<List<Task>> findName(@RequestParam String name){
-		List<Task> list = taskService.findName(name);
-		return ResponseEntity.ok(list);
+	public ResponseEntity<List<Task>> findDate(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date date) {
+		List<Task> list = taskService.findDate(date);
+		if (list != null) {
+			return ResponseEntity.ok(list);
+		}
+		return ResponseEntity.noContent().build();
 	}
-	
-	//Pesquisa todas as tasks
-	//@GetMapping
-	//public ResponseEntity<List<Task>> findAll(){
-	//	List<Task> list = taskService.findAll();
-	//	return ResponseEntity.ok(list);
-	//}
-	
-	//Pesquisa a task pelo Id
+
+	// Pesquina pelo nome da Task
+	// @GetMapping
+	// public ResponseEntity<List<Task>> findName(@RequestParam String name){
+	// List<Task> list = taskService.findName(name);
+	// return ResponseEntity.ok(list);
+	// }
+
+	// Pesquisa todas as tasks
+	// @GetMapping
+	// public ResponseEntity<List<Task>> findAll(){
+	// List<Task> list = taskService.findAll();
+	// return ResponseEntity.ok(list);
+	// }
+
+	// Pesquisa a task pelo Id
 	@GetMapping("/{id}")
-	public ResponseEntity<Optional<Task>> findById(@PathVariable Long id){
+	public ResponseEntity<Optional<Task>> findById(@PathVariable Long id) {
 		Optional<Task> task = taskService.findById(id);
 		return ResponseEntity.ok(task);
 	}
-	
-	//Instancia uma task
+
+	// Instancia uma task
 	@PostMapping
-	public ResponseEntity<Task> save(@RequestBody Task task){
-		System.out.println("teste");
+	public ResponseEntity<Task> save(@RequestBody Task task) {
 		Task objTask = taskService.save(task);
 		return ResponseEntity.ok(objTask);
 	}
-	
-	
-	//Atualiza uma task
+
+	// Atualiza uma task
 	@PutMapping("/{id}")
-	public ResponseEntity<Task> update(@PathVariable Long id, @RequestBody Task task){
+	public ResponseEntity<Task> update(@PathVariable Long id, @RequestBody Task task) {
 		Task objTask = taskService.update(id, task);
 		return ResponseEntity.ok(objTask);
 	}
-	
-	//Deleta uma task
+
+	// Deleta uma task
 	@DeleteMapping("/{id}")
-	public ResponseEntity<String> delete(@PathVariable Long id){
+	public ResponseEntity<String> delete(@PathVariable Long id) {
 		taskService.delete(id);
 		return ResponseEntity.ok("Deleted ok");
 	}

@@ -3,15 +3,18 @@ package com.myhome.JavaTrainee.entities;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
+@Table(name = "task")
 public class Task implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
@@ -28,8 +31,9 @@ public class Task implements Serializable{
 	@NotNull
 	private boolean completed;
 	
+	@Column(name = "created")
 	@NotNull
-	@DateTimeFormat(pattern = "dd-MM-yyyy")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date createdAt;
 	
 	public Task() {
