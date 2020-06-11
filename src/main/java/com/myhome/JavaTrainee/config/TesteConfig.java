@@ -40,7 +40,7 @@ public class TesteConfig implements CommandLineRunner {
 		jobRepository.saveAll(Arrays.asList(j1, j2, j3, j4, j5, j6));
 
 		// Criando os tasks
-		Task t1 = new Task(null, "Task1", 5, false, data);
+		Task t1 = new Task(null, "Task1", 5, false, data, j1);
 		Task t2 = new Task(null, "Task2", 6, false, data);
 		Task t3 = new Task(null, "Task3", 4, true, data);
 		Task t4 = new Task(null, "Task4", 2, true, data);

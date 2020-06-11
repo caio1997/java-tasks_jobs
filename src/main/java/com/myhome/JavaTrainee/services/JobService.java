@@ -59,7 +59,14 @@ public class JobService {
 		Job obj = jobRepository.getOne(id);
 		obj.setName(jobs.getName());
 		obj.setActive(jobs.isActive());
-		return jobRepository.save(obj);
+		
+		jobRepository.save(obj);
+		
+		////Utilizado para inserir a chave do Job na Task
+		obj.setTask(jobs.getTask());
+		taskService.saveJob(obj);
+		
+		return obj;
 	}
 
 	// Deleta uma Job
