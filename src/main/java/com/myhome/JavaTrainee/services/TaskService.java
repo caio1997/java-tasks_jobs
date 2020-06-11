@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.myhome.JavaTrainee.entities.Job;
 import com.myhome.JavaTrainee.entities.Task;
 import com.myhome.JavaTrainee.repositories.TaskRepository;
 
@@ -59,5 +60,15 @@ public class TaskService {
 		taskRepository.deleteById(id);
 		return "OK";
 	}
-
+	
+	//Metodo para inserir um Job na Task
+	public void saveJob(Job job) {
+		List<Task> task = job.getTask();
+		for(int x = 0; x < task.size(); x++) {
+			Long id = task.get(x).getId();
+			Task t = taskRepository.getOne(id);
+			t.setJob(job);
+			taskRepository.save(t);
+		}
+	}
 }

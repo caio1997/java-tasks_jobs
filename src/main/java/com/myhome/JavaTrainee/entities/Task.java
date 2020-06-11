@@ -8,10 +8,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "task")
@@ -36,6 +40,11 @@ public class Task implements Serializable{
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date createdAt;
 	
+	@JsonIgnore
+	@ManyToOne
+	@JoinColumn(name = "id_job")
+	private Job job;
+	
 	public Task() {
 	}
 
@@ -46,6 +55,16 @@ public class Task implements Serializable{
 		this.weight = weight;
 		this.completed = completed;
 		this.createdAt = createdAt;
+	}
+	
+	public Task(Long id, String name, Integer weight, boolean completed, Date createdAt, Job job) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.weight = weight;
+		this.completed = completed;
+		this.createdAt = createdAt;
+		this.job = job;
 	}
 
 	public Long getId() {
@@ -86,6 +105,14 @@ public class Task implements Serializable{
 
 	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
+	}
+
+	public Job getJob() {
+		return job;
+	}
+
+	public void setJob(Job job) {
+		this.job = job;
 	}
 
 	@Override

@@ -1,9 +1,13 @@
 package com.myhome.JavaTrainee.entities;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -20,6 +24,9 @@ public class Job {
 	
 	@NotNull
 	private boolean active;
+	
+	@OneToMany(mappedBy = "job")
+	private List<Task> task;
 	
 	public Job() {
 	}
@@ -53,6 +60,14 @@ public class Job {
 
 	public void setActive(boolean active) {
 		this.active = active;
+	}
+
+	public List<Task> getTask() {
+		return task;
+	}
+
+	public void setTask(List<Task> task) {
+		this.task = task;
 	}
 
 	@Override
