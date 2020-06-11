@@ -1,6 +1,8 @@
 package com.myhome.JavaTrainee.entities;
 
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -11,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -37,7 +41,7 @@ public class Task implements Serializable{
 	
 	@Column(name = "created")
 	@NotNull
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@Temporal(TemporalType.DATE)
 	private Date createdAt;
 	
 	@JsonIgnore
@@ -66,7 +70,14 @@ public class Task implements Serializable{
 		this.createdAt = createdAt;
 		this.job = job;
 	}
-
+	
+	
+	//public String getDataFormatada() {
+    //   SimpleDateFormat formatado = new SimpleDateFormat("dd/MM/yyyy");
+    //   String dataFormat = formatado.format(this.createdAt);
+    //   return dataFormat;
+    //}
+	
 	public Long getId() {
 		return id;
 	}

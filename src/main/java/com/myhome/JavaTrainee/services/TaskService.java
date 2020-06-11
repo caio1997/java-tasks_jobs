@@ -17,10 +17,16 @@ public class TaskService {
 	@Autowired
 	private TaskRepository taskRepository;
 
-	// Pesquisar pelo nome da Task
+	// Pesquisar pela data da Task
+	//Exemplo de URI: http://localhost:8080/task?date=2020-06-11
 	public List<Task> findDate(Date date) {
 		return taskRepository.findDate(date);
 	}
+	
+	// Pesquisar pelo nome da Task
+	//	public List<Task> findName(String name) {
+	//		return taskRepository.findName(name);
+	//	}
 
 	// Pesquisa todos as tasks
 	// public List<Task> findAll(){

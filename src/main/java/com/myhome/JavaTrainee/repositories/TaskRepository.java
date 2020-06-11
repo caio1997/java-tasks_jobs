@@ -18,4 +18,8 @@ public interface TaskRepository extends JpaRepository<Task, Long>{
 	//SQL para pesquisar o nome da task
 	@Query(value = "SELECT * FROM task WHERE created = ?1", nativeQuery = true)
 	List<Task> findDate(Date date);
+	
+	//SQL para pesquisar o nome da task
+	//	@Query(value = "SELECT * FROM task WHERE name = ?1", nativeQuery = true)
+	//	List<Task> findName(String name);
 }
