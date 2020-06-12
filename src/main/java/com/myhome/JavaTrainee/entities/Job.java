@@ -9,8 +9,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.transaction.Transactional;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -97,4 +100,31 @@ public class Job {
 			return false;
 		return true;
 	}
+	
+	@Transient
+	@JsonIgnore
+	public Integer sum() {
+		Integer soma = 0;
+		for(int x = 0; x < task.size(); x++){
+			soma = soma + task.get(x).getWeight();
+		}
+		return soma;
+	}
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

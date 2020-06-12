@@ -1,5 +1,8 @@
 package com.myhome.JavaTrainee.services;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,10 +22,19 @@ public class JobService {
 	@Autowired
 	private TaskService taskService;
 
+	// Pesquisa todos as jobs de acordo com o peso das suas tasks
+		public List<Job> findAll() {
+			List<Job> list;
+			list = jobRepository.findAll();
+			Collections.sort(list,(job1, job2) -> job1.sum().compareTo(job2.sum()));
+			Collections.reverse(list);
+			return list;
+		}
+	
 	// Pesquisa todos as jobs
-	public List<Job> findAll() {
-		return jobRepository.findAll();
-	}
+	//public List<Job> findAll() {
+	//	return jobRepository.findAll();
+	//}
 
 	// Pesquisa o job pelo ID
 	public Optional<Job> findById(Long id) {
