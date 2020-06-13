@@ -1,13 +1,10 @@
 package com.myhome.JavaTrainee.services;
 
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.config.Task;
 import org.springframework.stereotype.Service;
 
 import com.myhome.JavaTrainee.entities.Job;
@@ -43,17 +40,28 @@ public class JobService {
 	}
 
 	// Instancia uma Job
-	public Job save(Job job) {
-		Job objJob = new Job();
-		objJob.setName(job.getName());
-		objJob.setActive(job.isActive());
-		jobRepository.save(objJob);
-		
-		//Utilizado para inserir a chave do Job na Task
-		objJob.setTask(job.getTask());
-		taskService.saveJob(objJob);
-				
-		return objJob;
+	public Job save(Job job){
+		List<Job> listJob;
+		listJob = jobRepository.findAll();
+		Integer teste = 0;
+		for(int x = 0; x < listJob.size(); x++) {
+			if(listJob.get(x).getName().equals(job.getName())) {
+				teste += 1;
+			}
+		}
+		if(teste < 1) {		
+			Job objJob = new Job();
+			objJob.setName(job.getName());
+			objJob.setActive(job.isActive());
+			jobRepository.save(objJob);
+			
+			//Utilizado para inserir a chave do Job na Task
+			objJob.setTask(job.getTask());
+			taskService.saveJob(objJob);
+			
+			return objJob;
+		}
+		return job;
 	}
 
 	// Instancia uma Job

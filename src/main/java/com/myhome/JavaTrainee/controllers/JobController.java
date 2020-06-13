@@ -40,9 +40,14 @@ public class JobController {
 
 	// Instancia uma job
 	@PostMapping
-	public ResponseEntity<Job> save(@RequestBody Job job) {
+	public ResponseEntity<Job> save(@RequestBody Job job){
 		Job objJob = jobService.save(job);
-		return ResponseEntity.ok(objJob);
+		if(objJob.getId() != null) {
+			return ResponseEntity.ok(objJob);
+		}else {	
+			
+			return ResponseEntity.noContent().build();
+		}
 	}
 
 	// Atualiza uma job

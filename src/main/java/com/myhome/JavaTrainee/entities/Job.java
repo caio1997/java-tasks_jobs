@@ -2,7 +2,6 @@ package com.myhome.JavaTrainee.entities;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,7 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-import javax.transaction.Transactional;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -33,6 +31,7 @@ public class Job {
 	
 	@OneToMany(mappedBy = "job")
 	private List<Task> task;
+	
 	
 	public Job() {
 	}
@@ -112,12 +111,6 @@ public class Job {
 	}
 
 }
-
-
-
-
-
-
 
 
 
